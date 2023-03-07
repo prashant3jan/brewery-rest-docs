@@ -36,7 +36,7 @@ public class BeerControllerV2 {
 
         val savedDto = beerServiceV2.saveNewBeer(beerDto);
 
-        var headers = new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders();
         //todo add hostname to url
         headers.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
 

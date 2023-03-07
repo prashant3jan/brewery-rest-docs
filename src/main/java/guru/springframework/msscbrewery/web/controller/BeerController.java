@@ -5,6 +5,7 @@ import guru.springframework.msscbrewery.web.model.BeerDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,13 +32,13 @@ public class BeerController {
     }
 
     @PostMapping // POST - create new beer
-    public ResponseEntity handlePost(@Valid @RequestBody BeerDto beerDto){
+    public ResponseEntity handlePost(@RequestBody @Validated BeerDto beerDto){
 
         BeerDto savedDto = beerService.saveNewBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
         //todo add hostname to url
-        headers.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
+        //headers.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
 
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
